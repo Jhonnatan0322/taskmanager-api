@@ -1,5 +1,6 @@
 package com.tatandev.taskmanager;
 
+import com.tatandev.taskmanager.dto.TaskDTO;
 import com.tatandev.taskmanager.entity.Task;
 import com.tatandev.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TaskController {
     }
 
     @GetMapping("/api/tasks")
-    public List<Task> obtenerTodasLasTareas(){
+    public List<TaskDTO> obtenerTodasLasTareas(){
         return taskService.obtenerTodas();
     }
 
@@ -35,7 +36,7 @@ public class TaskController {
     }
 
     @GetMapping("/api/tasks/{id}")
-    public Task obtenerTareaPorId(@PathVariable Long id){
+    public TaskDTO obtenerTareaPorId(@PathVariable Long id){
         return taskService.obtenerPorId(id);
     }
 
