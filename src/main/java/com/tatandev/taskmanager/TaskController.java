@@ -1,0 +1,52 @@
+package com.tatandev.taskmanager;
+
+import com.tatandev.taskmanager.entity.Task;
+import com.tatandev.taskmanager.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.ArrayList;
+
+@RestController
+public class TaskController {
+    @Autowired
+    private TaskService taskService;
+
+    @GetMapping("/api/tasks/saludo")
+    public String saludar(){
+        return  "Task Manager API funcionando";
+    }
+
+    @GetMapping("/api/tasks/ejemplo")
+    public Task obtenerTareaEjemplo(){
+        Task tarea = new Task("Tarea de prueba");
+        return tarea;
+    }
+
+    @GetMapping("/api/tasks")
+    public List<Task> obtenerTodasLasTareas(){
+        return taskService.obtenerTodas();
+    }
+
+    @PostMapping("/api/tasks")
+    public Task crearTarea(@RequestBody Task nuevaTarea){
+        return taskService.crearTarea(nuevaTarea);
+    }
+
+    @GetMapping("/api/tasks/{id}")
+    public Task obtenerTareaPorId(@PathVariable Long id){
+        return taskService.obtenerPorId(id);
+    }
+
+    @PutMapping("/api/tasks/{id}")
+    public Task actualizarTarea(@PathVariable Long id,@RequestBody Task datosActualizados){
+        return taskService.actualizarTarea(id,datosActualizados);
+    }
+
+    @DeleteMapping("/api/tasks/{id}")
+    public void eliminarTarea(@PathVariable Long id){
+        taskService.eliminarTarea(id);
+    }
+
+}
