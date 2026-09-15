@@ -3,6 +3,7 @@ package com.tatandev.taskmanager;
 import com.tatandev.taskmanager.dto.TaskDTO;
 import com.tatandev.taskmanager.entity.Task;
 import com.tatandev.taskmanager.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class TaskController {
     }
 
     @PostMapping("/api/tasks")
-    public Task crearTarea(@RequestBody Task nuevaTarea){
+    public Task crearTarea(@Valid @RequestBody Task nuevaTarea){
         return taskService.crearTarea(nuevaTarea);
     }
 
@@ -41,7 +42,7 @@ public class TaskController {
     }
 
     @PutMapping("/api/tasks/{id}")
-    public Task actualizarTarea(@PathVariable Long id,@RequestBody Task datosActualizados){
+    public Task actualizarTarea(@PathVariable Long id,@Valid @RequestBody Task datosActualizados){
         return taskService.actualizarTarea(id,datosActualizados);
     }
 

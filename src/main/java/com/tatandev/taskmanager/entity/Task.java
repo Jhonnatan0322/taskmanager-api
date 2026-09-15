@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Task {
@@ -11,6 +12,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "El titulo no puede estar vacio")
     private String title;
     private boolean completed;
 
@@ -20,9 +22,6 @@ public class Task {
 
     public Task(String title) {
 
-        if(title == null || title.isBlank()){
-            throw new IllegalArgumentException("El titulo no puede estar vacio");
-        }
         this.title = title;
         this.completed = false;
 
